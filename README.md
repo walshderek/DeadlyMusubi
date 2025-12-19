@@ -4,6 +4,8 @@
 
 This repository contains standardized templates and scripts for training custom LoRAs using the Musubi Tuner framework with Wan 2.2 models. Part of the [Deadly Graphics](https://github.com/walshderek/deadlygraphics) AI production pipeline.
 
+> **Note**: All musubi configurations imported from deadlygraphics repository and ready to use!
+
 ## 📋 Overview
 
 Wan 2.2 is a dual-noise video generation model that requires specialized training configurations. This repo provides:
