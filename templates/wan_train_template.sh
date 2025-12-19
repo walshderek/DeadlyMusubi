@@ -7,7 +7,7 @@
 PROJECT_NAME="${1:-my_project}"
 TRIGGER_WORD="ohwx" # Default trigger, can be overridden
 WSL_MODEL_ROOT="/mnt/c/AI/models"
-WSL_APP_ROOT="/home/seanf/workspace/deadlygraphics/ai/apps/musubi-tuner"
+WSL_APP_ROOT="${WSL_APP_ROOT:-$HOME/workspace/deadlygraphics/ai/apps/musubi-tuner}"
 
 # --- MODEL PATHS (Wan 2.2 Standard) ---
 # Note: Wan 2.2 paths confirmed from original batch file
