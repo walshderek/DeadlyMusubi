@@ -1,0 +1,28 @@
+If you want to replicate my results with my data and settings (for speed and to avoid OOMs), you need to use the musubi-tuner repo from Aug. 15th, before some code changes that altered how Windows manages memory.  The included zip is the repo from that date, untouched.
+
+-------------------------------------------------------
+
+git clone https://github.com/kohya-ss/musubi-tuner.git
+
+cd musubi-tuner
+
+git fetch --all
+
+git checkout e7adb86
+
+python -m venv venv
+
+venv\scripts\activate
+
+pip install -e .
+
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+
+python versioncheck.py
+
+-------------------------------------------------------
+
+That should be all you need.  Use the models in my configs for best results.
+
+(you will need to paste the absolute path for versioncheck.py OR paste the script itself into your musubi root directory)
+

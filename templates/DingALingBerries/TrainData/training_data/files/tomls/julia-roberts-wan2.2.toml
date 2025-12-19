@@ -1,0 +1,14 @@
+[general]
+
+caption_extension = ".txt"
+batch_size = 1
+enable_bucket = true 
+bucket_no_upscale = false
+
+
+[[datasets]]
+
+image_directory = "C:/AI/musubi-tuner/source_data/julia-roberts-wan2.2"
+cache_directory = "C:/AI/musubi-tuner/source_data/julia-roberts-wan2.2/cache"
+num_repeats = 1
+resolution = [256,256]

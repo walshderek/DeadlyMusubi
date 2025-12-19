@@ -1,0 +1,15 @@
+Training resolution sets the size of the images used to create latents. The actual training does not use images, it uses their latents, which are heavily compressed and very small. The JPEG or PNG never enters GPU memory during training. Only the latent is trained. Because of this, the pixel resolution of the original image has limited influence on the learning process.
+
+Every concept has a resolution threshold. Once the LoRA has fully learned the identity, style, or behavior, additional resolution adds nothing. Increasing training resolution beyond the point where the concept is already understood does not improve the LoRA. It only increases VRAM usage, training time, and the risk of instability, overfitting, and inflexibility.
+
+Inference resolution is separate. It comes from the base model and is not determined by anything in the training configuration. The LoRA does not set or limit output size. You can generate at any supported resolution regardless of the size used during training.
+
+Your LoRA will not teach Wan how to draw fine strands of hair or pores or lip textures.  That stuff is already in the base model.  Training your loRA at 1024 will not improve fidelity beyond the threshold of learning.
+
+Facial likeness is solid and commercial quality at [256,256].
+
+The underboob and goth girls style LoRAs were trained at only [200,200].
+
+Test them yourself.  Ask yourself if the outputs are low quality.  Then think about how to set your toml and how to train your LoRA.
+
+The number one point of failure when attemtpting to train a LoRA is OOM based on absurd training resolution.

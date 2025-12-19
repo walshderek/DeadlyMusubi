@@ -1,0 +1,23 @@
+DIM sets the capacity of the LoRA. A small DIM creates a small area of influence. A large DIM creates a large area of influence. File size grows directly with DIM. ALPHA sets the strength of that influence. High ALPHA increases how forcefully the LoRA modifies the base model.
+
+Most common LoRA subjects do not require high capacity. Single characters, celebrities, outfits, actions, poses, and simple behaviors can be expressed cleanly with DIM 8–16 and matching ALPHA. DIM 32 is already more than most concepts need. DIM values far beyond this provide no quality increase and only inflate the file size.
+
+Large DIM creates unused space inside the adapter. During training, this unused space can accumulate irrelevant adjustments that have nothing to do with the concept. These unintended changes can interfere with lighting, color, style, or other LoRAs. High DIM increases noise, increases incompatibility, and increases the chance of altering parts of the base model that did not need modification.
+
+Small DIM keeps the LoRA precise. Large DIM spreads influence across wide regions of the model, causing conflicts. A LoRA intended for a single subject or a single style should never approach a significant fraction of the size of the base model. Oversized settings for simple concepts are unnecessary and wasteful.
+
+Use the smallest DIM that fully expresses the concept. Increasing DIM or ALPHA beyond the needs of the subject does not improve fidelity or function. It only increases size, increases noise, increases interference, and reduces flexibility.
+
+Underboob and Goth Girls Style are both very small fles - 37.5mb - but absolutely fully functional and effective.  A single file is doing the same work as two 300mb files in both cases.  37.5mb is 6.25% of the file size.  The other LoRA is 16 times as big.  Even 37.5mb is large for such simple concepts, but the lora net needs structure.  I have not tested much below 4/4 but plan to eventually train arrays for demo and testing.
+
+I have sold a few hundred LoRAs at 16/16 and my customers seemed quite happy and came back for more.
+
+Your LoRA file is not just a bucket.  It is a skin.  Make sure your concepts fit the skin and your skin fits the concepts.  Don't put the tiny data in the giant skin.
+
+4/4 = 37.5mb
+8/8 = 75mb
+16/16 = 150mb - this is a sweet spot for resource usage and size - almost anything you want to train can fit here comfortably.
+32/32 = 300mb
+64/64 = 600mb - this is unnecessary for almost any purpose you might consider.
+128/128 = 1.2gb - you need to consider compartmentalizing your data or think about fine-tuning.
+256/256 = useful for distillation of bases and other similar uses to preserve shapes as much as possible, but for training on datasets, this is absurd and ridiculous.  You need to fine-tune a base.  Or train multiple LoRAs.

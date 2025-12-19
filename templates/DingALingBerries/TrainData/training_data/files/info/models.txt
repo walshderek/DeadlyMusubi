@@ -1,0 +1,22 @@
+Official models are best for training:
+
+get both 
+
+wan2.2_t2v_high_noise_14B_fp16.safetensors
+
+and 
+
+wan2.2_t2v_low_noise_14B_fp16.safetensors
+
+from here:
+
+https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/tree/main/split_files/diffusion_models
+
+and use these instead of safetensors:
+
+https://huggingface.co/Wan-AI/Wan2.1-T2V-14B/blob/main/Wan2.1_VAE.pth
+
+https://huggingface.co/Wan-AI/Wan2.1-T2V-14B/blob/main/models_t5_umt5-xxl-enc-bf16.pth
+
+
+

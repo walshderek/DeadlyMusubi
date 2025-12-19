@@ -1,0 +1,5 @@
+The files in the /cache folder are the outputs from the VAE and UMT5 encoders... the training data has already been processed and cached there.
+
+My toml points to this cache at the specified location.  Put this cache folder there, and run the launcher.bat.
+
+You do not need the actual training data to train the LoRA, and since the material contains some nsfw photos of real people, I have decided not to tempt the prudes.

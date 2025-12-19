@@ -1,0 +1,24 @@
+[general]
+
+caption_extension = ".txt"
+batch_size = 1
+enable_bucket = true 
+bucket_no_upscale = false
+
+
+[[datasets]]
+
+image_directory = "C:/AI/musubi-tuner/source_data/mandelbrot-wan2.2/images"
+cache_directory = "C:/AI/musubi-tuner/source_data/mandelbrot-wan2.2/images/cache"
+num_repeats = 1
+resolution = [228,228]
+
+
+[[datasets]]
+
+video_directory = "C:/AI/musubi-tuner/source_data/mandelbrot-wan2.2/videos"
+cache_directory = "C:/AI/musubi-tuner/source_data/mandelbrot-wan2.2/videos/cache"
+num_repeats = 1
+resolution = [192,192]
+frame_extraction = "full"
+max_frames = 33

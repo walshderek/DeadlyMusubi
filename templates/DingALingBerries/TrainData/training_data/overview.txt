@@ -1,0 +1,17 @@
+This is just a brief outline to orient you to the package.
+
+You need to install musubi-tuner to train a LoRA for Wan 2.2 using my configurations.  install_musubi-tuner.txt has instructions for you to copy and paste into the terminal.
+
+Once musubi is installed, make sure your data is ready.  Gather media, sort it and crop it and cull it to appropriate size and caption it.  For a person LoRA, 35 images is enough. A single word trigger for a person is perfectly functional and flexible.
+
+Once data is prepped and captioned, you need to set up your .toml as the dataset config.  Copy and paste your paths for the data and cache.  Leave everything else alone.  Make sure all slashes are *forward slashes*.  Use search and replace to be sure.  Save it with a unique name for this LoRA.
+
+Now that you have a .toml that points to your prepped data, you need to cache the latents and text encoder outputs with wan_caching.bat, which runs the musubi scripts to process your dataset and save the training samples to disk in /cache (from your .toml).  Edit the .bat with the paths to your .toml and your VAE and UMT5.  Some safetensors files will not work, so I recommend the official .pth files for VAE and UMT5 linked in models.txt.  Once you paste your paths, save the file and double-click it.  You can watch the caching happening.  When it's done press a key to close the window. You will have one file from the text encoder and one file from the VAE for each training sample, so if you have 35 images, there should be 70 files in the /cache after you run the wan_caching.bat file.  I tend to have to check to appease my curiosity - occasionally errors do occur based on weird file names or something else.
+
+So that is all you need to do before launching the training.  Edit the train.bat with the proper paths and filenames for your LoRA and leave the settings alone.  Adjust the # of CPU workers to match your processor - give it half of your threads to start with.  Use the person LoRA config files for all of this to train a facial likeness LoRA.  Don't change the configuration or launch settings until after you have successfully run a training and know your system is functional.  Paste your paths and make sure your root is correct and your names are to your liking, then save it with a unique name for your LoRA.
+
+Now you can simply double-click the train.bat to launch training.
+
+GPT, Perplexity, Grok... Copilot, Claude, etc... these really can help you with python errors.  In my experience, almost all errors neophytes encounter are simple path or syntax errors.  Everyone messes up the slashes in the .toml.  Copy and paste your entire error from just above the first "Traceback..." message into one of the LLMs and just give it a bit of context.
+
+if you have any questions - just-for-ai-shits.half687@passinbox.com

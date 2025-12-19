@@ -4,6 +4,12 @@ outputs/
 *.ckpt
 *.pth
 
+# Large archive files
+*.7z
+*.zip
+*.rar
+*.tar.gz
+
 # Generated configs (project-specific)
 configs/*.toml
 configs/*.sh

@@ -1,0 +1,1245 @@
+Trying to import sageattention
+Failed to import sageattention
+INFO:musubi_tuner.wan.modules.model:Detected DiT dtype: torch.float16
+INFO:musubi_tuner.wan_train_network:Converted timestep_boundary to 0 to 1 range: 0.875
+INFO:musubi_tuner.hv_train_network:Load dataset config from C:\AI\musubi-tuner\files\tomls\julia-roberts-wan2.2.toml
+INFO:musubi_tuner.dataset.image_video_dataset:glob images in C:/AI/musubi-tuner/source_data/julia-roberts-wan2.2
+INFO:musubi_tuner.dataset.image_video_dataset:found 35 images
+INFO:musubi_tuner.dataset.config_utils:[Dataset 0]
+  is_image_dataset: True
+  resolution: (256, 256)
+  batch_size: 1
+  num_repeats: 1
+  caption_extension: ".txt"
+  enable_bucket: True
+  bucket_no_upscale: False
+  cache_directory: "C:/AI/musubi-tuner/source_data/julia-roberts-wan2.2/cache"
+  debug_dataset: False
+    image_directory: "C:/AI/musubi-tuner/source_data/julia-roberts-wan2.2"
+    image_jsonl_file: "None"
+    fp_latent_window_size: 9
+    fp_1f_clean_indices: None
+    fp_1f_target_index: None
+    fp_1f_no_post: False
+    flux_kontext_no_resize_control: False
+
+
+INFO:musubi_tuner.dataset.image_video_dataset:bucket: (192, 336, 9), count: 1
+INFO:musubi_tuner.dataset.image_video_dataset:bucket: (208, 304, 9), count: 18
+INFO:musubi_tuner.dataset.image_video_dataset:bucket: (224, 288, 9), count: 14
+INFO:musubi_tuner.dataset.image_video_dataset:bucket: (240, 272, 9), count: 2
+INFO:musubi_tuner.dataset.image_video_dataset:total batches: 35
+INFO:musubi_tuner.hv_train_network:preparing accelerator
+C:\AI\musubi-tuner\venv\lib\site-packages\accelerate\accelerator.py:506: UserWarning: `log_with=tensorboard` was passed but no supported trackers are currently installed.
+  warnings.warn(f"`log_with={log_with}` was passed but no supported trackers are currently installed.")
+accelerator device: cuda
+INFO:musubi_tuner.hv_train_network:DiT precision: torch.float16, weight precision: None
+INFO:musubi_tuner.hv_train_network:Loading DiT model from A:\Models\diffusion_models\Wan\wan2.2_t2v_low_noise_14B_fp16.safetensors
+INFO:musubi_tuner.wan.modules.model:Creating WanModel. I2V: False, FLF2V: False, V2.2: True, device: cuda, loading_device: cuda, fp8_scaled: True
+INFO:musubi_tuner.wan.modules.model:Loading DiT model from A:\Models\diffusion_models\Wan\wan2.2_t2v_low_noise_14B_fp16.safetensors, device=cuda
+INFO:musubi_tuner.utils.lora_utils:Loading model files: ['A:\\Models\\diffusion_models\\Wan\\wan2.2_t2v_low_noise_14B_fp16.safetensors']
+INFO:musubi_tuner.utils.lora_utils:Loading state dict with FP8 optimization. Dtype of weight: None, hook enabled: False
+Loading wan2.2_t2v_low_noise_14B_fp16.safetensors: 100%|██████████████████████████| 1095/1095 [00:56<00:00, 19.41key/s]
+INFO:musubi_tuner.modules.fp8_optimization_utils:Number of optimized Linear layers: 400
+INFO:musubi_tuner.modules.fp8_optimization_utils:Number of monkey-patched Linear layers: 400
+INFO:musubi_tuner.wan.modules.model:Moving weights to cuda
+INFO:musubi_tuner.wan.modules.model:Loaded DiT model from A:\Models\diffusion_models\Wan\wan2.2_t2v_low_noise_14B_fp16.safetensors, info=<All keys matched successfully>
+INFO:musubi_tuner.wan_train_network:Loading high noise model from A:\Models\diffusion_models\Wan\wan2.2_t2v_high_noise_14B_fp16.safetensors
+INFO:musubi_tuner.wan.modules.model:Creating WanModel. I2V: False, FLF2V: False, V2.2: True, device: cuda, loading_device: cpu, fp8_scaled: True
+INFO:musubi_tuner.wan.modules.model:Loading DiT model from A:\Models\diffusion_models\Wan\wan2.2_t2v_high_noise_14B_fp16.safetensors, device=cpu
+INFO:musubi_tuner.utils.lora_utils:Loading model files: ['A:\\Models\\diffusion_models\\Wan\\wan2.2_t2v_high_noise_14B_fp16.safetensors']
+INFO:musubi_tuner.utils.lora_utils:Loading state dict with FP8 optimization. Dtype of weight: None, hook enabled: False
+Loading wan2.2_t2v_high_noise_14B_fp16.safetensors: 100%|█████████████████████████| 1095/1095 [01:00<00:00, 18.04key/s]
+INFO:musubi_tuner.modules.fp8_optimization_utils:Number of optimized Linear layers: 400
+INFO:musubi_tuner.modules.fp8_optimization_utils:Number of monkey-patched Linear layers: 400
+INFO:musubi_tuner.wan.modules.model:Loaded DiT model from A:\Models\diffusion_models\Wan\wan2.2_t2v_high_noise_14B_fp16.safetensors, info=<All keys matched successfully>
+import network module: networks.lora_wan
+INFO:musubi_tuner.networks.lora:create LoRA network. base dim (rank): 16, alpha: 16.0
+INFO:musubi_tuner.networks.lora:neuron dropout: p=None, rank dropout: p=None, module dropout: p=None
+INFO:musubi_tuner.networks.lora:create LoRA for U-Net/DiT: 400 modules.
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_0_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_1_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_2_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_3_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_4_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_5_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_6_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_7_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_8_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_self_attn_q                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_self_attn_k                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_self_attn_v                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_self_attn_o                     16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_cross_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_cross_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_cross_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_cross_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_ffn_0                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_9_ffn_2                           16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_10_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_11_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_12_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_13_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_14_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_15_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_16_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_17_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_18_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_19_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_20_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_21_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_22_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_23_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_24_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_25_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_26_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_27_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_28_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_29_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_30_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_31_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_32_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_33_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_34_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_35_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_36_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_37_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_38_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_self_attn_q                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_self_attn_k                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_self_attn_v                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_self_attn_o                    16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_cross_attn_q                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_cross_attn_k                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_cross_attn_v                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_cross_attn_o                   16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_ffn_0                          16, 16.0
+INFO:musubi_tuner.networks.lora:        lora_unet_blocks_39_ffn_2                          16, 16.0
+INFO:musubi_tuner.networks.lora:enable LoRA for U-Net: 400 modules
+WanModel: Gradient checkpointing enabled.
+prepare optimizer, data loader etc.
+INFO:musubi_tuner.hv_train_network:use 8-bit AdamW optimizer | {}
+override steps. steps for 40 epochs is / 指定エポックまでのステップ数: 1400
+running training / 学習開始
+  num train items / 学習画像、動画数: 35
+  num batches per epoch / 1epochのバッチ数: 35
+  num epochs / epoch数: 40
+  batch size per device / バッチサイズ: 1
+  gradient accumulation steps / 勾配を合計するステップ数 = 1
+  total optimization steps / 学習ステップ数: 1400
+INFO:musubi_tuner.hv_train_network:set DiT model name for metadata: A:\Models\diffusion_models\Wan\wan2.2_t2v_low_noise_14B_fp16.safetensors
+INFO:musubi_tuner.hv_train_network:set VAE model name for metadata: A:\Models\VAE\Wan\Wan2.1_VAE.pth
+steps:   0%|                                                                                  | 0/1400 [00:00<?, ?it/s]INFO:musubi_tuner.hv_train_network:DiT dtype: torch.float16, device: cuda:0
+
+epoch 1/40
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+Trying to import sageattention
+Failed to import sageattention
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 0, epoch: 1
+steps:   2%|█▍                                                     | 35/1400 [02:10<1:24:46,  3.73s/it, avr_loss=0.113]
+epoch 2/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 1, epoch: 2
+steps:   5%|██▊                                                      | 70/1400 [02:49<53:36,  2.42s/it, avr_loss=0.111]
+epoch 3/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 2, epoch: 3
+steps:   8%|████▎                                                     | 105/1400 [03:27<42:40,  1.98s/it, avr_loss=0.1]
+epoch 4/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 3, epoch: 4
+steps:  10%|█████▌                                                  | 140/1400 [04:05<36:49,  1.75s/it, avr_loss=0.105]
+epoch 5/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 4, epoch: 5
+steps:  12%|███████                                                 | 175/1400 [04:43<33:05,  1.62s/it, avr_loss=0.103]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000005.safetensors
+
+epoch 6/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 5, epoch: 6
+steps:  15%|████████▍                                               | 210/1400 [05:22<30:27,  1.54s/it, avr_loss=0.102]
+epoch 7/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 6, epoch: 7
+steps:  18%|█████████▋                                             | 245/1400 [06:00<28:18,  1.47s/it, avr_loss=0.0904]
+epoch 8/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 7, epoch: 8
+steps:  20%|███████████                                            | 280/1400 [06:38<26:33,  1.42s/it, avr_loss=0.0915]
+epoch 9/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 8, epoch: 9
+steps:  22%|████████████▍                                          | 315/1400 [07:16<25:02,  1.38s/it, avr_loss=0.0979]
+epoch 10/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 9, epoch: 10
+steps:  25%|█████████████▊                                         | 350/1400 [07:54<23:42,  1.36s/it, avr_loss=0.0954]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000010.safetensors
+
+epoch 11/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 10, epoch: 11
+steps:  28%|███████████████▏                                       | 385/1400 [08:33<22:32,  1.33s/it, avr_loss=0.0928]
+epoch 12/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 11, epoch: 12
+steps:  30%|████████████████▌                                      | 420/1400 [09:11<21:25,  1.31s/it, avr_loss=0.0951]
+epoch 13/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 12, epoch: 13
+steps:  32%|██████████████████▏                                     | 455/1400 [09:49<20:23,  1.29s/it, avr_loss=0.092]
+epoch 14/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 13, epoch: 14
+steps:  35%|███████████████████▎                                   | 490/1400 [10:27<19:24,  1.28s/it, avr_loss=0.0861]
+epoch 15/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 14, epoch: 15
+steps:  38%|████████████████████▋                                  | 525/1400 [11:05<18:28,  1.27s/it, avr_loss=0.0837]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000015.safetensors
+
+epoch 16/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 15, epoch: 16
+steps:  40%|██████████████████████                                 | 560/1400 [11:44<17:36,  1.26s/it, avr_loss=0.0819]
+epoch 17/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 16, epoch: 17
+steps:  42%|███████████████████████▍                               | 595/1400 [12:22<16:44,  1.25s/it, avr_loss=0.0931]
+epoch 18/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 17, epoch: 18
+steps:  45%|████████████████████████▊                              | 630/1400 [13:00<15:53,  1.24s/it, avr_loss=0.0902]
+epoch 19/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 18, epoch: 19
+steps:  48%|██████████████████████████▏                            | 665/1400 [13:38<15:04,  1.23s/it, avr_loss=0.0874]
+epoch 20/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 19, epoch: 20
+steps:  50%|███████████████████████████▌                           | 700/1400 [14:16<14:16,  1.22s/it, avr_loss=0.0884]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000020.safetensors
+
+epoch 21/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 20, epoch: 21
+steps:  52%|████████████████████████████▉                          | 735/1400 [14:55<13:30,  1.22s/it, avr_loss=0.0884]
+epoch 22/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 21, epoch: 22
+steps:  55%|██████████████████████████████▎                        | 770/1400 [15:33<12:44,  1.21s/it, avr_loss=0.0841]
+epoch 23/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 22, epoch: 23
+steps:  57%|███████████████████████████████▌                       | 805/1400 [16:11<11:58,  1.21s/it, avr_loss=0.0793]
+epoch 24/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 23, epoch: 24
+steps:  60%|█████████████████████████████████                      | 840/1400 [16:49<11:13,  1.20s/it, avr_loss=0.0864]
+epoch 25/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 24, epoch: 25
+steps:  62%|██████████████████████████████████▍                    | 875/1400 [17:27<10:28,  1.20s/it, avr_loss=0.0766]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000025.safetensors
+
+epoch 26/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 25, epoch: 26
+steps:  65%|███████████████████████████████████▊                   | 910/1400 [18:06<09:45,  1.19s/it, avr_loss=0.0859]
+epoch 27/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 26, epoch: 27
+steps:  68%|█████████████████████████████████████▏                 | 945/1400 [18:45<09:01,  1.19s/it, avr_loss=0.0735]
+epoch 28/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 27, epoch: 28
+steps:  70%|██████████████████████████████████████▌                | 980/1400 [19:23<08:18,  1.19s/it, avr_loss=0.0787]
+epoch 29/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 28, epoch: 29
+steps:  72%|███████████████████████████████████████▉               | 1015/1400 [20:01<07:35,  1.18s/it, avr_loss=0.081]
+epoch 30/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 29, epoch: 30
+steps:  75%|████████████████████████████████████████▌             | 1050/1400 [20:39<06:53,  1.18s/it, avr_loss=0.0876]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000030.safetensors
+
+epoch 31/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 30, epoch: 31
+steps:  78%|█████████████████████████████████████████▊            | 1085/1400 [21:18<06:11,  1.18s/it, avr_loss=0.0728]
+epoch 32/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 31, epoch: 32
+steps:  80%|███████████████████████████████████████████▏          | 1120/1400 [21:56<05:29,  1.18s/it, avr_loss=0.0805]
+epoch 33/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 32, epoch: 33
+steps:  82%|████████████████████████████████████████████▌         | 1155/1400 [22:34<04:47,  1.17s/it, avr_loss=0.0766]
+epoch 34/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 33, epoch: 34
+steps:  85%|█████████████████████████████████████████████▉        | 1190/1400 [23:12<04:05,  1.17s/it, avr_loss=0.0852]
+epoch 35/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 34, epoch: 35
+steps:  88%|███████████████████████████████████████████████▎      | 1225/1400 [23:51<03:24,  1.17s/it, avr_loss=0.0817]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2-000035.safetensors
+
+epoch 36/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 35, epoch: 36
+steps:  90%|████████████████████████████████████████████████▌     | 1260/1400 [24:30<02:43,  1.17s/it, avr_loss=0.0782]
+epoch 37/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 36, epoch: 37
+steps:  92%|█████████████████████████████████████████████████▉    | 1295/1400 [25:08<02:02,  1.17s/it, avr_loss=0.0744]
+epoch 38/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 37, epoch: 38
+steps:  95%|████████████████████████████████████████████████████▎  | 1330/1400 [25:46<01:21,  1.16s/it, avr_loss=0.074]
+epoch 39/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 38, epoch: 39
+steps:  98%|████████████████████████████████████████████████████▋ | 1365/1400 [26:25<00:40,  1.16s/it, avr_loss=0.0772]
+epoch 40/40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+INFO:musubi_tuner.dataset.image_video_dataset:epoch is incremented. current_epoch: 39, epoch: 40
+steps: 100%|██████████████████████████████████████████████████████| 1400/1400 [27:03<00:00,  1.16s/it, avr_loss=0.0701]
+saving checkpoint: C:\AI\musubi-tuner\outputs\julia-roberts-wan2.2\julia-roberts-wan2.2.safetensors
+INFO:musubi_tuner.hv_train_network:model saved.
+steps: 100%|██████████████████████████████████████████████████████| 1400/1400 [27:04<00:00,  1.16s/it, avr_loss=0.0701]
+Press any key to continue . . .

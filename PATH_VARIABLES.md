@@ -82,6 +82,18 @@ There are **4 path format scenarios** used in this project:
 | MusubiToml (Win) | `C:/AI/musubi-tuner/logs` |
 | MusubiToml (Unix) | `/mnt/c/AI/musubi-tuner/logs` |
 
+#### Source Data (Training Data)
+| Format | Path Pattern |
+|--------|--------------|
+| Windows | `C:\AI\musubi-tuner\source_data\{name}\[photos|videos|images]` |
+| Unix | `/mnt/c/AI/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+| MusubiToml (Win) | `C:/AI/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+| MusubiToml (Unix) | `/mnt/c/AI/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+
+**Cache Directory Pattern:**
+- Windows: `C:\AI\musubi-tuner\source_data\{name}\[photos|videos|images]\cache`
+- MusubiToml: `C:/AI/musubi-tuner/source_data/{name}/[photos|videos|images]/cache`
+
 ---
 
 ### **DeadlyGraphics**
@@ -122,6 +134,18 @@ There are **4 path format scenarios** used in this project:
 | Format | Path |
 |--------|------|
 | Windows | `C:\AI\models\VAE\Wan\Wan2.1_VAE.pth` |
+#### Source Data (Training Data)
+| Format | Path Pattern |
+|--------|--------------|
+| Windows | `C:\AI\apps\musubi-tuner\source_data\{name}\[photos|videos|images]` |
+| Unix | `/mnt/c/AI/apps/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+| MusubiToml (Win) | `C:/AI/apps/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+| MusubiToml (Unix) | `/mnt/c/AI/apps/musubi-tuner/source_data/{name}/[photos|videos|images]` |
+
+**Cache Directory Pattern:**
+- Windows: `C:\AI\apps\musubi-tuner\source_data\{name}\[photos|videos|images]\cache`
+- MusubiToml: `C:/AI/apps/musubi-tuner/source_data/{name}/[photos|videos|images]/cache`
+
 | Unix | `/mnt/c/AI/models/VAE/Wan/Wan2.1_VAE.pth` |
 | MusubiToml (Win) | `C:/AI/models/VAE/Wan/Wan2.1_VAE.pth` |
 | MusubiToml (Unix) | `/mnt/c/AI/models/VAE/Wan/Wan2.1_VAE.pth` |
@@ -209,6 +233,7 @@ dit_low = "A:/Models/diffusion_models/Wan/wan2.2_t2v_low_noise_14B_fp16.safetens
 ```
 
 ### MusubiToml Example (Unix - DeadlyGraphics)
+4. **Source Data:** Add `/apps` → `C:\AI\musubi-tuner\source_data\` → `C:\AI\apps\musubi-tuner\source_data\`
 ```toml
 dit_low = "/mnt/c/AI/models/diffusion_models/Wan/wan2.2_t2v_low_noise_14B_fp16.safetensors"
 ```
