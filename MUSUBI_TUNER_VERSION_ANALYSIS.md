@@ -234,3 +234,90 @@ User mentioned possible ComfyUI slowdown around same timeframe (Aug 2024).
 **Validation**: Subsequent PRs #585 and #700 in v0.2.13/v0.2.14 specifically target Windows memory issues, confirming the regression exists.
 
 **For optimal performance on Windows**: Stick with v0.2.8 (commit e7adb86) as DingALingBerries recommends.
+
+---
+
+## Critical Dependency Update (December 2025)
+
+### ⚠️ NumPy 2.x Incompatibility Discovered
+
+**Date:** December 19, 2025  
+**Severity:** CRITICAL - Causes NaN errors in training/inference
+
+**Issue:** Users running e7adb86 with modern package managers may inadvertently install NumPy 2.x (released July 2024), which has breaking changes incompatible with e7adb86 code:
+
+- **Symptom:** NaN errors in attention calculations, corrupted outputs
+- **Root Cause:** NumPy 2.0+ changed dtype handling, memmap API, and array operations
+- **Impact:** Makes e7adb86 completely non-functional despite being the "stable" version
+- **Fix:** Force NumPy 1.x installation: `pip install "numpy<2.0"` (recommend 1.26.4)
+
+**Example Broken Environment (Dec 2025):**
+```
+torch: 2.8.0+cu128        ← Too new (expect 2.4.0)
+numpy: 2.2.6              ← CRITICAL: Breaks everything
+transformers: 4.54.1      ← Too new (expect 4.43.3)
+accelerate: 1.6.0         ← Too new (expect 0.33.0)
+```
+
+**Corrected Environment:**
+```
+torch: 2.4.0+cu124        ✅ Matched to Aug 2024
+numpy: 1.26.4             ✅ NumPy 1.x series
+transformers: 4.43.3      ✅ Matched to Aug 2024
+accelerate: 0.33.0        ✅ Matched to Aug 2024
+```
+
+### Recommended Dependency Pinning for e7adb86
+
+Create `requirements_e7adb86.txt`:
+```
+torch==2.4.0+cu124
+torchvision==0.19.0+cu124
+numpy==1.26.4
+transformers==4.43.3
+accelerate==0.33.0
+safetensors==0.4.4
+diffusers==0.30.0
+einops==0.7.0
+av==12.2.0
+opencv-python==4.10.0.84
+sentencepiece==0.2.0
+ftfy==6.3.1
+toml==0.10.2
+easydict==1.13
+voluptuous==0.15.2
+tqdm==4.66.5
+psutil==6.0.0
+```
+
+Install with:
+```bash
+pip install torch==2.4.0+cu124 torchvision==0.19.0+cu124 --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements_e7adb86.txt
+```
+
+---
+
+## Recommendations for Users
+
+### For DingALingBerries Organization:
+- ✅ **Continue using commit e7adb86** for Windows deployments
+- ⚠️ **CRITICAL:** Pin NumPy to 1.26.4 (avoid NumPy 2.x at all costs)
+- Document this as the last stable version before regression
+- Pin ALL package dependencies to August 2024 versions (see requirements above)
+- Create frozen venv for distribution to avoid dependency drift
+
+### For General Users:
+1. **Windows Users:** Use commit e7adb86 (Aug 16, 2024) for best performance
+   - **MUST use NumPy 1.26.4** (not NumPy 2.x)
+   - Recommended: PyTorch 2.4.0+cu124
+   - If experiencing NaN errors, check `pip show numpy` immediately
+2. **Linux Users:** May experiment with v0.2.14 but expect slower performance
+   - Same NumPy 1.x requirement applies
+3. **Mac Users:** Limited CUDA support; consider using CPU inference or cloud solutions
+
+### For Developers:
+- The dtype handling changes in PR #493 need reconsideration for Windows
+- Block-wise FP8 quantization may need optimization or toggle flag
+- Windows shared memory handling requires fundamental architectural changes
+- **All future versions must test compatibility with NumPy 2.x** or explicitly pin to NumPy 1.x

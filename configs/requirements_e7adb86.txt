@@ -1,0 +1,32 @@
+# Pinned dependencies for musubi-tuner commit e7adb86 (August 16, 2024)
+# This ensures compatibility and avoids NaN errors from NumPy 2.x
+
+# Core ML libraries - MUST match August 2024 versions
+numpy==1.26.4
+transformers==4.43.3
+accelerate==0.33.0
+safetensors==0.4.4
+diffusers==0.30.0
+
+# Video processing
+einops==0.7.0
+av==12.2.0
+opencv-python==4.10.0.84
+
+# Text processing
+sentencepiece==0.2.0
+ftfy==6.3.1
+
+# Configuration and utilities
+toml==0.10.2
+easydict==1.13
+voluptuous==0.15.2
+tqdm==4.66.5
+psutil==6.0.0
+
+# Note: PyTorch must be installed separately with CUDA support:
+# pip install torch==2.4.0+cu124 torchvision==0.19.0+cu124 --index-url https://download.pytorch.org/whl/cu124
+
+# Optional performance libraries (may fail to build on Windows - that's OK):
+# pip install flash-attn==2.6.3 --no-build-isolation
+# pip install xformers==0.0.27.post2
