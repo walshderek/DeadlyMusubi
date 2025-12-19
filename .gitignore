@@ -1,0 +1,32 @@
+# Training outputs
+outputs/
+*.safetensors
+*.ckpt
+*.pth
+
+# Generated configs (project-specific)
+configs/*.toml
+configs/*.sh
+!configs/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+/tmp/
+*.tmp
+*.bak

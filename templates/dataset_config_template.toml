@@ -1,0 +1,22 @@
+# Wan 2.2 Dataset Configuration Template
+# Replace [PROJECT_NAME] and [TRIGGER_WORD] with your values
+
+[general]
+enable_bucket = true
+resolution = [832, 480]  # Wan 2.2 standard resolution
+batch_size = 1
+
+[[datasets]]
+resolution = [832, 480]
+enable_bucket = true
+bucket_no_upscale = false
+caption_extension = ".txt"
+
+  [[datasets.subsets]]
+  image_dir = "/mnt/c/AI/training_data/[PROJECT_NAME]/images"
+  num_repeats = 10
+  shuffle_caption = false
+  keep_tokens = 1
+  color_aug = false
+  flip_aug = false
+  random_crop = false
